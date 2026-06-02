@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Guia de Mochi — Animal Crossing NH</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #7fb07a; --sage-light: #b8d8b5; --sage-xlight: #e8f5e6;
+    --peach-dark: #e8945a; --yellow-dark: #d4a017;
+    --cream: #fffbf0; --brown: #5c3d2e;
+    --text: #3a2e1e; --text-muted: #7a6a55;
+    --pink-dark: #c97474;
+    --radius: 16px; --shadow: 0 4px 20px rgba(92,61,46,0.1);
+    --purple-dark: #7a5ab0; --purple-bg: #f5f0ff; --purple-border: #c4b0e8;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Quicksand',sans-serif; background:var(--cream); color:var(--text);
+    background-image: radial-gradient(circle at 10% 20%, rgba(168,230,207,0.25) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(255,203,164,0.25) 0%, transparent 40%);
+    min-height:100vh; }
+  header { background:linear-gradient(135deg,#5c9e6e 0%,#7fb07a 40%,#a8c89a 100%);
+    color:white; padding:3rem 2rem 2.5rem; text-align:center; position:relative; overflow:hidden; }
+  header::before { content:""; position:absolute; bottom:-2px; left:0; right:0; height:30px;
+    background:var(--cream); border-radius:50% 50% 0 0/30px 30px 0 0; }
+  header .deco { font-size:32px; letter-spacing:10px; margin-bottom:1rem; opacity:0.9; }
+  header h1 { font-family:'Nunito',sans-serif; font-size:2.4rem; font-weight:900;
+    text-shadow:2px 3px 0px rgba(0,0,0,0.15); margin-bottom:0.4rem; }
+  header p { font-size:1rem; opacity:0.9; font-weight:600; }
+  nav { background:white; border-bottom:2px solid var(--sage-light); padding:0.8rem 1.5rem;
+    display:flex; flex-wrap:wrap; gap:7px; justify-content:center;
+    position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(127,176,122,0.12); }
+  nav a { text-decoration:none; background:var(--sage-xlight); color:#3d7a38;
+    border:1.5px solid var(--sage-light); border-radius:999px; padding:5px 13px;
+    font-size:13px; font-weight:700; transition:all 0.2s; white-space:nowrap; }
+  nav a:hover { background:var(--sage); color:white; border-color:var(--sage); transform:translateY(-1px); }
+  .container { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+  section { margin-bottom:2.8rem; scroll-margin-top:80px; }
+  .section-header { display:flex; align-items:center; gap:12px; margin-bottom:1.2rem;
+    padding-bottom:0.7rem; border-bottom:2px dashed var(--sage-light); }
+  .section-icon { font-size:26px; line-height:1; }
+  .section-title { font-family:'Nunito',sans-serif; font-size:1.4rem; font-weight:900; color:#3d7a38; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:1rem; }
+  .card { background:white; border-radius:var(--radius); padding:1.2rem;
+    border:1.5px solid #e0eed0; box-shadow:var(--shadow); transition:transform 0.2s; }
+  .card:hover { transform:translateY(-2px); }
+  .card h3 { font-family:'Nunito',sans-serif; font-size:0.95rem; font-weight:800;
+    color:var(--brown); margin-bottom:0.5rem; }
+  .card p, .card li { font-size:14px; line-height:1.7; color:var(--text-muted); }
+  .card ul { padding-left:1.2rem; }
+  .card li { margin-bottom:3px; }
+  .alert { border-radius:var(--radius); padding:1rem 1.25rem; margin-bottom:1rem;
+    border-left:4px solid; font-size:14px; line-height:1.7; }
+  .alert-green { background:#f0f9f0; border-color:var(--sage); color:#2d5a2a; }
+  .alert-peach { background:#fff5ed; border-color:var(--peach-dark); color:#8a4a20; }
+  .alert-sky { background:#eaf6ff; border-color:#5aabdb; color:#1a4e6e; }
+  .alert-yellow { background:#fffbeb; border-color:var(--yellow-dark); color:#7a5a00; }
+  .alert-purple { background:var(--purple-bg); border-color:var(--purple-dark); color:var(--purple-dark); }
+  .alert strong { display:block; font-weight:800; margin-bottom:3px; font-family:'Nunito',sans-serif; }
+  .table-wrap { overflow-x:auto; border-radius:var(--radius); border:1.5px solid #e0eed0; box-shadow:var(--shadow); }
+  table { width:100%; border-collapse:collapse; background:white; font-size:14px; }
+  th { background:var(--sage); color:white; font-family:'Nunito',sans-serif; font-weight:800;
+    padding:10px 14px; text-align:left; }
+  td { padding:9px 14px; border-bottom:1px solid #f0eed8; color:var(--text-muted); vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  tr:nth-child(even) td { background:#f9fdf5; }
+  .timeline { position:relative; padding-left:2.5rem; }
+  .timeline::before { content:""; position:absolute; left:13px; top:0; bottom:0;
+    width:2px; background:var(--sage-light); border-radius:2px; }
+  .timeline-item { position:relative; margin-bottom:1.4rem; }
+  .timeline-dot { position:absolute; left:-2.5rem; top:4px; width:28px; height:28px;
+    border-radius:50%; background:var(--sage); border:3px solid white;
+    box-shadow:0 0 0 2px var(--sage-light); display:flex; align-items:center;
+    justify-content:center; font-size:12px; }
+  .timeline-item h4 { font-family:'Nunito',sans-serif; font-weight:800; font-size:15px;
+    color:var(--brown); margin-bottom:4px; }
+  .timeline-item p { font-size:14px; color:var(--text-muted); line-height:1.6; }
+  .mochi-note { background:linear-gradient(135deg,#fff9f0,#fff5fb);
+    border:2px dashed #f0b8d0; border-radius:var(--radius);
+    padding:1.1rem 1.4rem; margin:1rem 0; position:relative; }
+  .mochi-note::before { content:"Nota de Arnau";
+    position:absolute; top:-12px; left:16px; background:white;
+    border:1.5px solid #f0b8d0; border-radius:999px; padding:2px 12px;
+    font-size:11px; font-weight:700; color:var(--pink-dark); font-family:'Nunito',sans-serif; }
+  .mochi-note p { font-size:14px; color:#7a3a5a; line-height:1.7; margin-top:4px; }
+  .tools-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(175px,1fr)); gap:12px; }
+  .tool-card { background:white; border-radius:12px; border:1.5px solid #e0eed0;
+    padding:1rem; text-align:center; box-shadow:var(--shadow); transition:transform 0.2s; }
+  .tool-card:hover { transform:translateY(-2px); }
+  .tool-emoji { font-size:26px; margin-bottom:5px; }
+  .tool-name { font-family:'Nunito',sans-serif; font-weight:800; font-size:13px; color:var(--brown); margin-bottom:3px; }
+  .tool-desc { font-size:12px; color:var(--text-muted); line-height:1.5; }
+  .tool-durability { margin-top:5px; font-size:11px; font-weight:700; color:var(--peach-dark); }
+  .season-box { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
+  .season-card { background:white; border-radius:12px; border:1.5px solid #e0eed0; padding:1rem; box-shadow:var(--shadow); }
+  .season-card h4 { font-family:'Nunito',sans-serif; font-weight:800; font-size:14px;
+    color:var(--brown); margin-bottom:8px; padding-bottom:5px; border-bottom:1px dashed #e0eed0; }
+  .season-card ul { list-style:none; padding:0; font-size:13px; color:var(--text-muted); }
+  .season-card li { padding:3px 0; }
+  .tt-steps { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:12px; margin:1rem 0; }
+  .tt-step { background:white; border-radius:12px; border:2px solid var(--purple-border); padding:1.1rem; position:relative; }
+  .tt-step-num { position:absolute; top:-11px; left:12px; background:var(--purple-dark); color:white;
+    border-radius:999px; padding:2px 10px; font-size:11px; font-weight:800; font-family:'Nunito',sans-serif; }
+  .tt-step h4 { font-family:'Nunito',sans-serif; font-weight:800; font-size:13px;
+    color:var(--purple-dark); margin-bottom:4px; margin-top:6px; }
+  .tt-step p { font-size:13px; color:var(--text-muted); line-height:1.6; }
+  .footer { background:#3d7a38; color:rgba(255,255,255,0.9); text-align:center;
+    padding:2rem; font-size:14px; line-height:1.8; }
+  .footer strong { color:white; font-family:'Nunito',sans-serif; font-size:16px; }
+  .footer .hearts { font-size:18px; letter-spacing:6px; margin:0.5rem 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="deco">🍃 🌸 🐟 🦋 🍄</div>
+  <h1>La Guia de Mochi</h1>
+  <p>Animal Crossing: New Horizons — para Saskia, de Arnau 🐾</p>
+</header>
+
+<nav>
+  <a href="#inicio">🏝️ Inicio</a>
+  <a href="#primeros-dias">📅 Primeros dias</a>
+  <a href="#time-travel">⏰ Saltar dias</a>
+  <a href="#herramientas">🔧 Herramientas</a>
+  <a href="#dinero">🔔 Dinero</a>
+  <a href="#personajes">👥 Personajes</a>
+  <a href="#pesca">🎣 Pesca</a>
+  <a href="#bichos">🦋 Bichos</a>
+  <a href="#isla">⭐ Tu isla</a>
+  <a href="#trucos">🔐 Trucos</a>
+</nav>
+
+<div class="container">
+
+  <section id="inicio">
+    <div class="section-header">
+      <span class="section-icon">🏝️</span>
+      <span class="section-title">Que es esto y por donde empiezas</span>
+    </div>
+
+    <div class="mochi-note">
+      <p>Saskia, aqui no hay delitos que resolver ni expedientes que entregar. Solo tu islita, tus bichitos y todo el tiempo del mundo. Consideralo el programa de proteccion de testigos mas bonito del mundo. Con amor, Arnau 🔐🌸</p>
+    </div>
+
+    <div class="alert alert-green">
+      <strong>La idea del juego en pocas palabras</strong>
+      Llegas a una isla desierta con Tom Nook (un mapache con mucha cara) y montas tu vida desde cero. Pescas, cazas bichos, decoras tu casa, haces amigos animales. No hay enemigos, no puedes morir, no hay urgencia. El juego usa la hora y fecha reales de la Switch, aunque te enseno a saltarte eso enseguida.
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>🌍 Lo primero: elige hemisferio norte</h3>
+        <p>Te lo preguntan al empezar. Elige <strong>norte</strong> (Espana). Determina las estaciones del ano y que bichos y peces aparecen cada mes.</p>
+      </div>
+      <div class="card">
+        <h3>🗺️ El mapa de la isla importa</h3>
+        <p>Te dan a elegir entre 4 mapas al azar. Si ninguno te gusta, cierra el juego sin guardar y vuelve a abrirlo — te dan otros 4. Busca uno con playa grande. No se puede cambiar despues.</p>
+      </div>
+      <div class="card">
+        <h3>📛 El nombre de isla tampoco se cambia</h3>
+        <p>Piensatelo. Isla Mochi, Sakura, lo que quieras. Pero es para siempre, asi que no lo pongas de cualquier manera.</p>
+      </div>
+      <div class="card">
+        <h3>👤 Nombre y cumpleanos: tampoco</h3>
+        <p>El cumpleanos hace que tus vecinos te hagan fiesta ese dia. El aspecto del personaje si se puede cambiar despues, asi que no te agobies eligiendo el pelo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="primeros-dias">
+    <div class="section-header">
+      <span class="section-icon">📅</span>
+      <span class="section-title">Los primeros dias</span>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot">🏕️</div>
+        <h4>Dia 1 — Llegas a la isla</h4>
+        <p>Coloca tu tienda de campana (ahi luego sera tu casa, elige bien el sitio). Saluda a los dos vecinos que ya estan. Tom Nook te pide <strong>10 ramas y 6 frutas</strong> — sacude arboles para las ramas, sacude arboles frutales para la fruta. Por la noche hay hoguera y te dan el NookPhone.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">🎣</div>
+        <h4>Dia 1–2 — Caña y red</h4>
+        <p>Tom Nook te ensena a fabricar una cana de pescar y una red de mariposas en el banco de DIY. Tienes que darle <strong>5 criaturas distintas</strong> — peces o bichos, lo que pilles. Cada una tiene recompensa y la quinta desbloquea el museo.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">🏠</div>
+        <h4>Dia 2–3 — Tu casa</h4>
+        <p>La primera deuda es de <strong>5.000 Nook Miles</strong>, no Bells. Los Miles se consiguen haciendo cualquier cosa: pescar, cavar, hablar, correr... Es muy facil acumularlos. Cuando los pagues, la tienda de campana se convierte en casa de verdad.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">🏪</div>
+        <h4>Dia 3–5 — La tienda Nook</h4>
+        <p>Para abrir la tienda le tienes que dar a Timmy <strong>30 de cada tipo de madera</strong> (soft, hard y normal) y <strong>30 hierros</strong>. Los hierros salen de golpear rocas con pala o hacha. Las maderas de golpear arboles con hacha. Con la tienda abierta ya puedes comprar y vender con normalidad.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">🦉</div>
+        <h4>Dia 3 en adelante — El museo</h4>
+        <p>Blathers el buho acepta peces, bichos, fosiles y arte. Cada donacion añade algo al museo, que esta muy trabajado y es precioso. Ademas identifica fosiles gratis sin limite. Vale la pena ir siempre que tengas algo nuevo.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">✈️</div>
+        <h4>Dia 2 en adelante — Islas misteriosas</h4>
+        <p>Con <strong>2.000 Nook Miles</strong> puedes ir al aeropuerto a una isla aleatoria. Siempre hay recursos nuevos y a veces hay un vecino al que puedes invitar. Vacia el inventario antes de ir porque vuelves cargada.</p>
+      </div>
+    </div>
+
+    <div class="mochi-note">
+      <p>Los primeros dias pueden parecer lentos porque el juego te va soltando cosas de una en una. Pero en cuanto tienes la casa, la tienda y el museo ya esta todo disponible. Si te impacienta esperar, justo abajo te explico como saltar dias.</p>
+    </div>
+  </section>
+
+  <section id="time-travel">
+    <div class="section-header">
+      <span class="section-icon">⏰</span>
+      <span class="section-title">Como saltar dias (time travel)</span>
+    </div>
+
+    <div class="alert alert-purple">
+      <strong>Esto lo hace todo el mundo y nadie lo dice abiertamente</strong>
+      El juego coge la hora y la fecha de la Switch para saber que dia es en la isla. Si cambias la fecha de la consola, el juego cree que han pasado esos dias. No esta penalizado, no hay consecuencias serias si lo haces con un poco de cabeza.
+    </div>
+
+    <p style="font-size:14px; color:var(--text-muted); margin-bottom:1rem; line-height:1.7">Lo mas util al principio: saltar 1 o 2 dias cuando estas esperando que se construya algo. Nadie se queda mirando la pantalla 3 dias reales si puede no hacerlo.</p>
+
+    <div class="tt-steps">
+      <div class="tt-step">
+        <div class="tt-step-num">Paso 1</div>
+        <h4>Cierra el juego del todo</h4>
+        <p>Pulsa Home → manten el boton sobre el juego → "Cerrar software". No basta con minimizarlo.</p>
+      </div>
+      <div class="tt-step">
+        <div class="tt-step-num">Paso 2</div>
+        <h4>Configuracion de la Switch</h4>
+        <p>El engranaje en el menu principal → "Configuracion de la consola" → "Fecha y hora".</p>
+      </div>
+      <div class="tt-step">
+        <div class="tt-step-num">Paso 3</div>
+        <h4>Desactiva la sincronizacion</h4>
+        <p>Desactiva "Sincronizar hora via internet". Si no lo haces, no te deja cambiar la fecha a mano.</p>
+      </div>
+      <div class="tt-step">
+        <div class="tt-step-num">Paso 4</div>
+        <h4>Cambia la fecha</h4>
+        <p>Ponla al dia que quieras. Un dia adelante para que acabe la construccion, o saltar a julio para pillar tiburones en pleno marzo.</p>
+      </div>
+      <div class="tt-step">
+        <div class="tt-step-num">Paso 5</div>
+        <h4>Abre el juego</h4>
+        <p>El juego detecta el cambio y actualiza todo: tienda con articulos nuevos, botella en la playa, fosiles, el arbol de Bells crecio...</p>
+      </div>
+      <div class="tt-step">
+        <div class="tt-step-num">Vuelta</div>
+        <h4>Para volver al tiempo real</h4>
+        <p>Activa de nuevo la sincronizacion automatica y listo. O pon la fecha de hoy a mano si lo prefieres.</p>
+      </div>
+    </div>
+
+    <div class="cards" style="margin-top:1rem">
+      <div class="card">
+        <h3>Lo mas util para lo que se usa</h3>
+        <ul>
+          <li>Avanzar 1 dia para que termine una construccion</li>
+          <li>Ir a verano para cazar escarabajos o tiburones</li>
+          <li>Conseguir peces o bichos de otras estaciones</li>
+          <li>Cuando el juego se pone lento y quieres que pase algo</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Lo que puede fastidiar si te pasas</h3>
+        <ul>
+          <li>Saltar mas de 2 semanas de golpe puede matar flores si no las regaste</li>
+          <li>Los nabos del Stalk Market caducan el domingo siguiente — con nabos encima, no saltes semanas</li>
+          <li>Viajar hacia atras en el tiempo hace cosas raras con el inventario de la tienda</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mochi-note">
+      <p>Yo lo use mucho al principio para desbloquear cosas mas rapido y luego ya me meti en el ritmo normal. Saltar 1 dia cuando esperas que acabe algo es lo mas comun. Para ir a pillar escarabajos de verano en pleno invierno tambien mola mucho.</p>
+    </div>
+  </section>
+
+  <section id="herramientas">
+    <div class="section-header">
+      <span class="section-icon">🔧</span>
+      <span class="section-title">Herramientas</span>
+    </div>
+
+    <div class="alert alert-yellow">
+      <strong>Se rompen con el uso</strong>
+      Todas las herramientas tienen durabilidad. Las "endebles" (Flimsy) duran muy poco. Lleva siempre alguna de repuesto. La receta de herramientas decentes cuesta 3.000 Nook Miles en el cajero Nook Stop — es de lo primero en lo que gastar.
+    </div>
+
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-emoji">🎣</div>
+        <div class="tool-name">Caña de pescar</div>
+        <div class="tool-desc">Lanza delante del pez, espera el plop del flotador y pulsa A rapido.</div>
+        <div class="tool-durability">Endeble: ~10 usos</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🦋</div>
+        <div class="tool-name">Red de captura</div>
+        <div class="tool-desc">Para bichos. Ve agachada (boton B) para no espantarlos.</div>
+        <div class="tool-durability">Endeble: ~10 usos</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">⛏️</div>
+        <div class="tool-name">Pala</div>
+        <div class="tool-desc">Cava fosiles, planta arboles, desentierra cofres en la playa.</div>
+        <div class="tool-durability">Endeble: ~40 usos</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🪓</div>
+        <div class="tool-name">Hacha</div>
+        <div class="tool-desc">Corta madera de arboles. La hacha de piedra no tala. La hacha normal si.</div>
+        <div class="tool-durability">Normal: ~100 usos</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🎿</div>
+        <div class="tool-name">Pertiga</div>
+        <div class="tool-desc">Para saltar rios. No se rompe nunca. La receta te la da Blathers.</div>
+        <div class="tool-durability">Infinita</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🪜</div>
+        <div class="tool-name">Escalera</div>
+        <div class="tool-desc">Para subir acantilados. La desbloqueas un poco mas adelante con las misiones.</div>
+        <div class="tool-durability">Infinita</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🔭</div>
+        <div class="tool-name">Tirachinas</div>
+        <div class="tool-desc">Para derribar globos que pasan volando. Pulsa A cuando el globo este encima.</div>
+        <div class="tool-durability">Normal: ~20 usos</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-emoji">🌿</div>
+        <div class="tool-name">Regadera</div>
+        <div class="tool-desc">Para regar flores. Las flores regadas se propagan al dia siguiente.</div>
+        <div class="tool-durability">Endeble: ~20 usos</div>
+      </div>
+    </div>
+
+    <div class="mochi-note" style="margin-top:1rem">
+      <p>Lo de las herramientas que se rompen fue lo que mas me costo. Estaba pescando tranquilamente y se me rompio la cana con el pez casi cogido. Es desesperante. Lleva siempre dos de cada en el inventario 😅</p>
+    </div>
+  </section>
+
+  <section id="dinero">
+    <div class="section-header">
+      <span class="section-icon">🔔</span>
+      <span class="section-title">El dinero — Bells y Nook Miles</span>
+    </div>
+
+    <p style="font-size:14px; color:var(--text-muted); margin-bottom:1rem; line-height:1.7">Hay dos monedas. Los <strong>Bells</strong> son el dinero normal para comprar cosas y pagar la casa. Los <strong>Nook Miles</strong> son puntos que ganas haciendo cualquier actividad y sirven para cosas especificas como billetes de isla o recetas.</p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>💰 El agujero dorado</h3>
+        <p>Cada dia hay un agujero brillante en algun sitio de la isla. Al cavarlo salen Bells. Si plantas ahi 10.000 Bells, en unos dias crece un arbol que da el triple. Es dinero gratis diario si no te lo pierdes.</p>
+      </div>
+      <div class="card">
+        <h3>🪨 La roca de dinero</h3>
+        <p>Una vez al dia una roca da Bells en vez de materiales. Para sacar el maximo: cava dos hoyos en diagonal detras tuyo antes de golpearla. Asi no rebotaras y puedes darle 8 veces seguidas — hasta 16.100 Bells de una roca.</p>
+      </div>
+      <div class="card">
+        <h3>🐟 C.J. y Flick</h3>
+        <p>Dos personajes que visitan la isla de vez en cuando. <strong>C.J.</strong> compra peces al 150%. <strong>Flick</strong> hace lo mismo con los bichos. Cuando los veas en tu isla, guardales todo lo que tengas.</p>
+      </div>
+      <div class="card">
+        <h3>📦 El mercado de nabos</h3>
+        <p>Los domingos por la manana, Daisy Mae vende nabos. Los puedes vender de lunes a sabado en la tienda a precios que cambian cada dia. Si el precio supera los 200 Bells por nabo, vale la pena vender todo. Es basicamente la bolsa pero con verduras.</p>
+      </div>
+    </div>
+
+    <div class="alert alert-peach" style="margin-top:1rem">
+      <strong>En que gastar los Nook Miles primero</strong>
+      Receta de herramientas decentes (3.000) → ampliaciones de inventario (800 y luego 1.600) → billetes de isla misteriosa (2.000 cada uno). Lo demas puede esperar.
+    </div>
+  </section>
+
+  <section id="personajes">
+    <div class="section-header">
+      <span class="section-icon">👥</span>
+      <span class="section-title">Personajes que vas a conocer</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Personaje</th><th>Quien es</th><th>Para que sirve</th></tr></thead>
+        <tbody>
+          <tr><td>🦝 <strong>Tom Nook</strong></td><td>El mapache que lo organiza todo</td><td>Misiones principales y los prestamos de tu casa</td></tr>
+          <tr><td>🦦 <strong>Timmy y Tommy</strong></td><td>Sus sobrinos, llevan la tienda</td><td>Compran y venden de todo. Al principio estan en Resident Services</td></tr>
+          <tr><td>🦉 <strong>Blathers</strong></td><td>El buho del museo</td><td>Acepta peces, bichos, fosiles y arte. Identifica fosiles gratis</td></tr>
+          <tr><td>🐶 <strong>Isabelle</strong></td><td>La secretaria</td><td>Te dice la valoracion de la isla y avisa de eventos</td></tr>
+          <tr><td>🐊 <strong>C.J.</strong></td><td>Un camaleon influencer de pesca</td><td>Visita la isla de vez en cuando y paga peces al 150%</td></tr>
+          <tr><td>🦎 <strong>Flick</strong></td><td>Un camaleon que ama los bichos</td><td>Igual que C.J. pero con bichos</td></tr>
+          <tr><td>🐗 <strong>Daisy Mae</strong></td><td>Una jabalina vendedora de nabos</td><td>Solo aparece los domingos de 5h a 12h para el Stalk Market</td></tr>
+          <tr><td>🦊 <strong>Redd</strong></td><td>Un zorro que vende arte</td><td>Cuadros y esculturas para el museo. A veces son falsificaciones</td></tr>
+          <tr><td>🎸 <strong>K.K. Slider</strong></td><td>Un perro musico famoso</td><td>Cuando la isla llega a 3 estrellas viene a actuar — es el "final" del arco principal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mochi-note" style="margin-top:1rem">
+      <p>Los vecinos animales que viven en tu isla son lo mejor del juego. Habla con ellos todos los dias — te dan regalos, recetas DIY, y dicen cosas muy graciosas. Investigacion de campo criminologica sobre comportamiento de vecinos animales 🔍🐨</p>
+    </div>
+  </section>
+
+  <section id="pesca">
+    <div class="section-header">
+      <span class="section-icon">🎣</span>
+      <span class="section-title">Pesca</span>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Como funciona</h3>
+        <ul>
+          <li>Lanza el sedal <strong>delante</strong> del pez — que lo vea</li>
+          <li>Espera a que el flotador se hunda del todo</li>
+          <li>Pulsa <strong>A</strong> cuando se hunda — sin tardarte</li>
+          <li>Si el flotador tiembla pero no se hunde, espera</li>
+          <li>Camina despacio — corriendo asustas al pez</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>La sombra te dice que pez es</h3>
+        <p>Antes de lanzar puedes ver la sombra del pez bajo el agua. Cuanto mas grande, mas grande el pez. Sombra enorme con aleta encima = tiburon. Valen 8.000+ Bells cada uno.</p>
+      </div>
+      <div class="card">
+        <h3>Con lluvia aparecen peces raros</h3>
+        <p>Cuando llueve en el juego hay mas probabilidad de peces grandes y valiosos. Si llueve, coge la cana.</p>
+      </div>
+      <div class="card">
+        <h3>Pesca de noche</h3>
+        <p>Algunos peces solo aparecen a partir de las 21h. El pez espada y el tiburon toro son dos ejemplos. Vale la pena hacer alguna sesion nocturna.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:1rem">
+      <h4 style="font-family:'Nunito',sans-serif;font-weight:800;color:var(--brown);margin-bottom:0.8rem;">Peces mas valiosos por temporada (hemisferio norte)</h4>
+      <div class="season-box">
+        <div class="season-card">
+          <h4>🌸 Primavera (Mar–May)</h4>
+          <ul>
+            <li>🐟 Dorado — rio</li>
+            <li>🐠 Pez mariposa — mar</li>
+            <li>🐟 Trucha — rio</li>
+          </ul>
+        </div>
+        <div class="season-card">
+          <h4>☀️ Verano (Jun–Aug)</h4>
+          <ul>
+            <li>🦈 Tiburon blanco — mar ⭐</li>
+            <li>🦈 Tiburon ballena — mar ⭐</li>
+            <li>🗡️ Pez espada — mar</li>
+            <li>🐟 Pez luna — mar</li>
+          </ul>
+        </div>
+        <div class="season-card">
+          <h4>🍂 Otoño (Sep–Nov)</h4>
+          <ul>
+            <li>🐟 Salmon real — boca rio ⭐</li>
+            <li>🐡 Pez globo — mar</li>
+            <li>🦑 Calamar gigante — mar</li>
+          </ul>
+        </div>
+        <div class="season-card">
+          <h4>❄️ Invierno (Dic–Feb)</h4>
+          <ul>
+            <li>🦑 Calamar humboldt — mar</li>
+            <li>🐟 Lucio — rio</li>
+            <li>🐠 Perca — rio</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bichos">
+    <div class="section-header">
+      <span class="section-icon">🦋</span>
+      <span class="section-title">Bichos</span>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Ve agachada siempre</h3>
+        <p>Manten pulsado <strong>B</strong> para ir agachada y lenta. La mayoria de bichos se espantan si corres hacia ellos. Con mariposas y ciervos volantes es imprescindible.</p>
+      </div>
+      <div class="card">
+        <h3>Bichos debajo de piedras y troncos</h3>
+        <p>Las escolopendras, milpies y cucarachas gigantes aparecen al mover piedras o sacudir troncos cortados. Son raros y valiosos para el museo.</p>
+      </div>
+      <div class="card">
+        <h3>Tarantulas y escorpiones</h3>
+        <p>Aparecen de noche en el suelo. Si te pican te mandan a casa. Para atraparlos ve muy despacio agachada. Si se pone en posicion de ataque, <strong>para del todo</strong>. Cuando se relaje, sigue avanzando.</p>
+      </div>
+      <div class="card">
+        <h3>Escarabajos en palmeras</h3>
+        <p>Los mas valiosos (ciervo volante, escarabajo hercules) aparecen de noche en palmeras de junio a agosto. Vale la pena usar time travel e ir al verano solo para esto.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:1rem">
+      <h4 style="font-family:'Nunito',sans-serif;font-weight:800;color:var(--brown);margin-bottom:0.8rem;">Los mas valiosos</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Bicho</th><th>Bells</th><th>Cuando</th><th>Donde</th></tr></thead>
+          <tbody>
+            <tr><td>🦂 Escorpion</td><td>8.000</td><td>May–Oct, noche</td><td>Suelo</td></tr>
+            <tr><td>🕷️ Tarantula</td><td>8.000</td><td>Nov–Apr, noche</td><td>Suelo</td></tr>
+            <tr><td>🪲 Ciervo volante</td><td>12.000</td><td>Jun–Aug, 23h–8h</td><td>Palmeras</td></tr>
+            <tr><td>🪲 Escarabajo hercules</td><td>12.000</td><td>Jul–Aug, 17h–8h</td><td>Palmeras ⭐</td></tr>
+            <tr><td>🪲 Escarabajo gigante</td><td>10.000</td><td>Jul–Aug, 23h–8h</td><td>Palmeras</td></tr>
+            <tr><td>🦋 Mariposa goliat</td><td>6.000</td><td>Jun–Sep, dia</td><td>Volando</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="isla">
+    <div class="section-header">
+      <span class="section-icon">⭐</span>
+      <span class="section-title">Tu isla y como mejorarla</span>
+    </div>
+
+    <p style="font-size:14px;color:var(--text-muted);margin-bottom:1rem;line-height:1.7">Isabelle te da una valoracion de 1 a 5 estrellas. El objetivo es llegar a 3 estrellas para que venga K.K. Slider a actuar — eso desbloquea el modo de terraformar, que es donde la gente acaba pasando cientos de horas.</p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>🌸 Planta flores</h3>
+        <p>Las flores regadas se propagan y crean flores de otros colores al dia siguiente. Los campos de flores suman mucho a la valoracion.</p>
+      </div>
+      <div class="card">
+        <h3>🪑 Pon cosas fuera de casa</h3>
+        <p>Los muebles y objetos DIY colocados fuera suman a la valoracion. No hace falta que tenga sentido estetico.</p>
+      </div>
+      <div class="card">
+        <h3>🏘️ Necesitas 10 vecinos</h3>
+        <p>Para llegar a 3 estrellas necesitas 10 vecinos animales. Los encuentras en islas misteriosas o aparecen solos con el tiempo.</p>
+      </div>
+      <div class="card">
+        <h3>🌍 Terraformar — el endgame</h3>
+        <p>Despues de K.K. Slider, la app Island Designer te deja crear acantilados, cambiar rios de sitio y hacer carreteras. Ahi es donde te das cuenta de que el juego no tiene un final real.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="trucos">
+    <div class="section-header">
+      <span class="section-icon">🔐</span>
+      <span class="section-title">Trucos que nadie te cuenta</span>
+    </div>
+
+    <div class="mochi-note">
+      <p>Esta seccion me la dedique a mi mismo cuando descubri que el juego tiene mas secretos que mis logs del DLP 🔐. Algunos de estos trucos son claves cosita echalos un vistazo.</p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>🪨 La roca de dinero bien hecha</h3>
+        <p>Antes de golpearla, cava dos hoyos en diagonal detras tuyo. Asi no rebotaras hacia atras y puedes golpear la roca 8 veces seguidas — hasta 16.100 Bells de una sola roca.</p>
+      </div>
+      <div class="card">
+        <h3>🎁 Los globos tienen patron</h3>
+        <p>Aparecen cada 5 minutos cuando el reloj marca minutos acabados en 4 o en 9 (09, 14, 19...). Posicionate mirando el mar y espera el sonido. El tirachinas los derriba — llevan muebles, Bells o recetas.</p>
+      </div>
+      <div class="card">
+        <h3>📬 Botella en la playa cada dia</h3>
+        <p>Cada dia aparece una botella con una receta DIY. Pasea por la playa para no perdertela. Tambien puedes conseguir recetas de tus vecinos cuando los visitas en casa mientras estan haciendo algo.</p>
+      </div>
+      <div class="card">
+        <h3>🍎 Las frutas de fuera valen mas</h3>
+        <p>Tu fruta nativa vale 100 Bells. Las frutas de otras islas valen 500 en la tuya. En islas misteriosas coge siempre todas las frutas que no tengas, plantalas en casa y tienes una fuente de dinero facil.</p>
+      </div>
+      <div class="card">
+        <h3>🧟 La isla de tarantulas</h3>
+        <p>En una isla misteriosa de noche, arranca todas las flores, troncos y fruta. Sin vegetacion solo generan tarantulas. Puedes llevarte 20+ en una visita — unos 160.000 Bells. Para la criminologa: es captura controlada de sujetos peligrosos 🕷️</p>
+      </div>
+      <div class="card">
+        <h3>🌟 Estrellas fugaces</h3>
+        <p>Cuando hay lluvia de meteoritos (lo anuncia un vecino el dia anterior), sal de noche <strong>sin herramienta equipada</strong> y pulsa A al ver una estrella. Al dia siguiente aparecen fragmentos de estrella en la playa para recetas raras de Celeste.</p>
+      </div>
+      <div class="card">
+        <h3>🌺 Hibridacion de flores</h3>
+        <p>Cruzando flores del mismo tipo con colores especificos pueden salir colores raros: azul, negro, dorado. Las rosas azules son el reto mas dificil. No es urgente pero cuando te pique el gusanillo hay guias enteras de esto.</p>
+      </div>
+      <div class="card">
+        <h3>📱 Apps que ayudan</h3>
+        <p><strong>Nook Plaza</strong> o <strong>AC Companion</strong> (movil): checklist de peces, bichos y fosiles que te faltan. <strong>Turnip Prophet</strong>: metes los precios de nabos de la semana y te predice cuando vender. Las dos molan mucho.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <div class="hearts">🌸 🍃 🐾 🍃 🌸</div>
+  <strong>Hecha con amor por Arnau para Saskia</strong>
+  <p style="margin-top:0.5rem;font-size:13px;opacity:0.8">
+    Porque despues de anos de trabajo duro, mereces una islita donde nadie te pida nada.<br>
+    Disfruta lo, Mochi 🐾
+  </p>
+  <div class="hearts" style="margin-top:0.5rem;font-size:14px;">🎣 🦋 🍄 🌺 ⭐</div>
+</footer>
+
+</body>
+</html>
